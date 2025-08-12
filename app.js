@@ -112,8 +112,10 @@ function operacoes() {
 
         switch(botaoId) {
             case "%":
-                expressao.push("%");
-                atualizarTela();
+                // if (expressao[expressao.length - 1] != "%") {
+                //     expressao.push("%");
+                //     atualizarTela();
+                // }
                 break;
             case "ce":
                 console.log(expressao);
@@ -142,27 +144,38 @@ function operacoes() {
             case "raiz":
                 break;
             case "divisao":
-                expressao.push("/");
-                atualizarTela();
+                if (expressao[expressao.length - 1] != "/") {
+                    expressao.push("/");
+                    atualizarTela();
+                }
                 break;
             case "x":
-                expressao.push("x");
-                atualizarTela();
+                if (expressao[expressao.length - 1] != "x") {
+                    expressao.push("*");
+                    atualizarTela();
+                }
                 break;
             case "-":
-                expressao.push("-");
-                atualizarTela();
+                if (expressao[expressao.length - 1] != "-") {
+                    expressao.push("-");
+                    atualizarTela();
+                }
                 break;
             case "+":
-                expressao.push("+");
-                atualizarTela();
+                if (expressao[expressao.length - 1] != "+") {
+                    expressao.push("+");
+                    atualizarTela();
+                }
                 break;
             case "maisOuMenos":
                 break;
             case "virgula":
-                break;
-            case "igual":
-                break;                  
+                alert("teste");
+                if (expressao[expressao.length - 1] != ".") {
+                    expressao.push(".");
+                    atualizarTela();
+                }
+                break;                 
         }   
     });
     });
@@ -181,6 +194,11 @@ function atualizarTela() {
     }else {
         tela.innerHTML = 0;
     }
+}
+
+function resultado() {
+    const resultado = eval(tela.textContent);
+    tela.innerHTML = resultado;
 }
 
 teclas();
