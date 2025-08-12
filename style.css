@@ -1,0 +1,75 @@
+:root {
+    --cor-background: hsl(0, 0%, 13%);
+    --cor-botoes: hsl(0, 0%, 24%);
+    --cor-botoes-hover: hsl(0, 0%, 24%, 0.8);
+    --cor-destaque: hsl(182, 81%, 53%);
+    --cor-destaque-hover: hsl(182, 81%, 53%, 0.8);
+
+}
+
+body {
+    background-color: black;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tela {
+    position: relative;
+    background-color: var(--cor-background);
+    width: 17rem;
+    height: 18rem;
+    border-radius: 2px;
+}
+
+.tela_resultado {
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+    overflow-inline: auto;
+    color: #FFFFFF;
+}
+
+.teclado {
+    position: absolute;
+    bottom: 5px;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 2px;
+}
+
+.teclado_filho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 4rem;
+    height: 2rem;
+    border-radius: 2px;
+    background-color: var(--cor-botoes);
+    border: 0;
+    color: #FFFFFF;
+    transition: all 100ms ease-in;
+}
+
+.teclado_filho_preferido {
+    background-color: var(--cor-destaque);
+    border: 0;
+    border-radius: 2px;
+    width: 4rem;
+    height: 2rem;
+    transition: all 100ms ease-in;
+}
+
+.teclado_filho_preferido:hover {
+    background-color: var(--cor-destaque-hover);
+}
+
+.teclado_filho:hover {
+    background-color: var(--cor-botoes-hover);
+}
