@@ -4,72 +4,82 @@
     --cor-botoes-hover: hsl(0, 0%, 24%, 0.8);
     --cor-destaque: hsl(182, 81%, 53%);
     --cor-destaque-hover: hsl(182, 81%, 53%, 0.8);
-
 }
 
 body {
     background-color: black;
-    margin: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    font-family: sans-serif;
 }
 
+/* 1. CONTAINER GERAL */
+/* Organiza o visor e o teclado um embaixo do outro e se adapta à tela */
 .tela {
-    position: relative;
     background-color: var(--cor-background);
-    width: 17rem;
-    height: 18rem;
-    border-radius: 2px;
+    width: 90%;
+    max-width: 380px; /* Limite para telas grandes */
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Itens em coluna */
+    gap: 20px; /* Espaço entre o visor e o teclado */
 }
 
+/* 2. VISOR DA CALCULADORA */
+/* O h1 tem margens padrão, vamos remover e estilizar */
 .tela_resultado {
+    margin: 0; /* Remove margem padrão do h1 */
+    padding: 15px;
     text-align: right;
-    padding-right: 10px;
-    padding-left: 10px;
-    overflow-inline: auto;
+    overflow-x: auto; /* Permite rolar números muito grandes */
     color: #FFFFFF;
+    background-color: hsl(0, 0%, 18%);
+    border-radius: 4px;
+    font-size: 2.8rem;
+    font-weight: normal;
+    min-height: 60px; /* Garante uma altura mínima */
 }
 
+/* 3. TECLADO */
+/* Cria a grade para os botões se alinharem */
 .teclado {
-    position: absolute;
-    bottom: 5px;
-    justify-self: center;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 2px;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas de tamanho igual */
+    gap: 12px; /* Espaço entre os botões */
 }
 
-.teclado_filho {
+/* 4. BOTÕES */
+/* Sem tamanho fixo, para que preencham a grade. Usamos flex para centralizar o texto/ícone */
+.teclado_filho, .teclado_filho_preferido {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 4rem;
-    height: 2rem;
-    border-radius: 2px;
-    background-color: var(--cor-botoes);
     border: 0;
-    color: #FFFFFF;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    cursor: pointer;
     transition: all 100ms ease-in;
+    min-height: 45px; /* Altura mínima para os botões */
+}
+
+.teclado_filho {
+    background-color: var(--cor-botoes);
+    color: #FFFFFF;
 }
 
 .teclado_filho_preferido {
     background-color: var(--cor-destaque);
-    border: 0;
-    border-radius: 2px;
-    width: 4rem;
-    height: 2rem;
-    transition: all 100ms ease-in;
+    color: black; /* Melhor contraste */
+}
+
+/* Efeitos ao passar o mouse */
+.teclado_filho:hover {
+    background-color: var(--cor-botoes-hover);
 }
 
 .teclado_filho_preferido:hover {
     background-color: var(--cor-destaque-hover);
-}
-
-.teclado_filho:hover {
-    background-color: var(--cor-botoes-hover);
 }

@@ -1,8 +1,8 @@
-const botoes = document.querySelectorAll(".teclado_filho");
-let tela = document.getElementById("tela");
-let expressao = [];
+const botoes = document.querySelectorAll(".teclado_filho"); // variável que captura todos botões do html usando a classe
+let tela = document.getElementById("tela"); // variável para atualizar a tela
+let expressao = []; // variável que armazenar a operação
 
-// Lógica para capturar os botões correto e seus valores
+// capturar os botões correto e seus valores
 function teclas() {
         botoes.forEach(botao => {
         botao.addEventListener("click", (evento) => {
@@ -105,6 +105,7 @@ function teclas() {
     });
 }
 
+// capturar as operações.
 function operacoes() {
     botoes.forEach(botao => {
     botao.addEventListener("click", (evento) => {
@@ -112,10 +113,10 @@ function operacoes() {
 
         switch(botaoId) {
             case "%":
-                // if (expressao[expressao.length - 1] != "%") {
-                //     expressao.push("%");
-                //     atualizarTela();
-                // }
+                if (expressao[expressao.length - 1] != "%" && isNaN(expressao[expressao.length - 1]) == false) {
+                    expressao.push("%");
+                    atualizarTela();
+                }
                 break;
             case "ce":
                 console.log(expressao);
@@ -144,25 +145,25 @@ function operacoes() {
             case "raiz":
                 break;
             case "divisao":
-                if (expressao[expressao.length - 1] != "/") {
+                if (expressao[expressao.length - 1] != "/" && isNaN(expressao[expressao.length - 1]) == false) {
                     expressao.push("/");
                     atualizarTela();
                 }
                 break;
             case "x":
-                if (expressao[expressao.length - 1] != "x") {
+                if (expressao[expressao.length - 1] != "x" && isNaN(expressao[expressao.length - 1]) == false) {
                     expressao.push("*");
                     atualizarTela();
                 }
                 break;
             case "-":
-                if (expressao[expressao.length - 1] != "-") {
+                if (expressao[expressao.length - 1] != "-" && isNaN(expressao[expressao.length - 1]) == false) {
                     expressao.push("-");
                     atualizarTela();
                 }
                 break;
             case "+":
-                if (expressao[expressao.length - 1] != "+") {
+                if (expressao[expressao.length - 1] != "+" && isNaN(expressao[expressao.length - 1]) == false) {
                     expressao.push("+");
                     atualizarTela();
                 }
@@ -170,8 +171,7 @@ function operacoes() {
             case "maisOuMenos":
                 break;
             case "virgula":
-                alert("teste");
-                if (expressao[expressao.length - 1] != ".") {
+                if (expressao[expressao.length - 1] != "." && isNaN(expressao[expressao.length - 1]) == false) {
                     expressao.push(".");
                     atualizarTela();
                 }
@@ -181,10 +181,12 @@ function operacoes() {
     });
 }
 
+// realizar as operações seguindo a regra de prioridade da matemática
 function calcularExpresao () {
 
 }
 
+// função para manter a tela do usuário atualizada
 function atualizarTela() {
     tela.innerHTML = "";
     if (expressao.length > 0) {
