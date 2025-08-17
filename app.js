@@ -110,6 +110,7 @@ function operacoes() {
     botoes.forEach(botao => {
     botao.addEventListener("click", (evento) => {
         const botaoId = botao.dataset.id;
+        const expressaoNormalizada = normalizarExpressao();
 
         switch(botaoId) {
             case "%":
@@ -119,14 +120,14 @@ function operacoes() {
                 }
                 break;
             case "ce":
-                console.log(expressao);
+                console.log(normalizarExpressao());
                 break;
             case "c":
                 expressao = [];
                 atualizarTela();
                 break;
             case "limpar":
-                 if (expressao.length > 0) {
+                if (expressao.length > 0) {
                     tela.innerHTML = "";
                     expressao.pop();
                     if (expressao.length == 0) {
@@ -136,13 +137,25 @@ function operacoes() {
                         tela.innerHTML += numero;
                     });
                     }
-                 }
+                }
                 break;
             case "meio":
+                const meio = 1 / expressaoNormalizada[0];
+                expressao = [];
+                expressao.push(meio);
+                atualizarTela();
                 break;
             case "potencia":
+                const potencia = expressaoNormalizada[0]  ** 2;
+                expressao = [];
+                expressao.push(potencia);
+                atualizarTela();
                 break;
             case "raiz":
+                const raiz = expressaoNormalizada[0] ** 0.5;
+                expressao = [];
+                expressao.push(raiz);
+                atualizarTela();
                 break;
             case "divisao":
                 if (expressao[expressao.length - 1] != "/" && isNaN(expressao[expressao.length - 1]) == false) {
@@ -181,9 +194,54 @@ function operacoes() {
     });
 }
 
-// realizar as operações seguindo a regra de prioridade da matemática
-function calcularExpresao () {
+function normalizarExpressao() {
+    const tempExpressao = [];
+    let temp = "";
 
+    expressao.forEach(valor => {
+            if (typeof valor == "number") {
+                temp += String(valor);
+            }else {
+                tempExpressao.push(Number(temp));
+                tempExpressao.push(valor);
+                temp = "";
+            }
+        });
+    tempExpressao.push(Number(temp))
+    return tempExpressao;
+}
+
+// realizar as operações seguindo a regra de prioridade da matemática
+function calcularExpresao() {
+    let tempExpressao = [...expressao];
+    let i = 0;
+
+    // Primeiro, processa multiplicação e divisão
+    while (i < tempExpressao.length) {
+        if (tempExpressao[i] === "*" || tempExpressao[i] === "/") {
+            const operador = tempExpressao[i];
+            const operando1 = Number(tempExpressao[i - 1]);
+            const operando2 = Number(tempExpressao[i + 1]);
+            let resultado = operador === "*" ? operando1 * operando2 : operando1 / operando2;
+            tempExpressao.splice(i - 1, 3, resultado);
+            i = 0; // reinicia para processar novamente
+        } else {
+            i++;
+        }
+    }
+
+    // Processa soma e subtração
+    let resultado = Number(tempExpressao[0]);
+    for (i = 1; i < tempExpressao.length; i += 2) {
+        const operador = tempExpressao[i];
+        const operando = Number(tempExpressao[i + 1]);
+        if (operador === "+") resultado += operando;
+        if (operador === "-") resultado -= operando;
+    }
+
+    expressao = [];
+    expressao.push(resultado);
+    atualizarTela();
 }
 
 // função para manter a tela do usuário atualizada
@@ -196,11 +254,6 @@ function atualizarTela() {
     }else {
         tela.innerHTML = 0;
     }
-}
-
-function resultado() {
-    const resultado = eval(tela.textContent);
-    tela.innerHTML = resultado;
 }
 
 teclas();
