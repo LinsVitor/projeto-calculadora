@@ -200,7 +200,7 @@ function normalizarExpressao() {
     let temp = "";
 
     expressao.forEach(valor => {
-            if (typeof valor == "number") {
+            if (typeof valor == "number" || valor === ".") {
                 temp += String(valor);
             }else {
                 tempExpressao.push(Number(temp));
