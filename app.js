@@ -1,8 +1,8 @@
-const botoes = document.querySelectorAll(".teclado_filho"); // variável que captura todos botões do html usando a classe
-let tela = document.getElementById("tela"); // variável para atualizar a tela
-let expressao = []; // variável que armazenar a operação
+const botoes = document.querySelectorAll(".teclado_filho"); // Variável que captura todos botões do html usando a classe
+let tela = document.getElementById("tela"); // Variável para atualizar a tela
+let expressao = []; // Variável que armazenar a operação
 
-// capturar os botões correto e seus valores
+// Capturar os botões correto e seus valores
 function teclas() {
         botoes.forEach(botao => {
         botao.addEventListener("click", (evento) => {
@@ -105,7 +105,7 @@ function teclas() {
     });
 }
 
-// capturar as operações.
+// Capturar as operações.
 function operacoes() {
     botoes.forEach(botao => {
     botao.addEventListener("click", (evento) => {
@@ -194,6 +194,7 @@ function operacoes() {
     });
 }
 
+// Junta todos valores em um índice, disso [5, 8, 0, "+", 0] para [580, "+", 0]
 function normalizarExpressao() {
     const tempExpressao = [];
     let temp = "";
@@ -211,9 +212,9 @@ function normalizarExpressao() {
     return tempExpressao;
 }
 
-// realizar as operações seguindo a regra de prioridade da matemática
+// Realizar as operações seguindo a regra de prioridade da matemática
 function calcularExpresao() {
-    let tempExpressao = [...expressao];
+    let tempExpressao = [...normalizarExpressao()];
     let i = 0;
 
     // Primeiro, processa multiplicação e divisão
@@ -244,7 +245,7 @@ function calcularExpresao() {
     atualizarTela();
 }
 
-// função para manter a tela do usuário atualizada
+// Função para manter a tela do usuário atualizada
 function atualizarTela() {
     tela.innerHTML = "";
     if (expressao.length > 0) {
