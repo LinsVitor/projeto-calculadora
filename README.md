@@ -20,5 +20,5 @@ O principal objetivo deste projeto foi a prática da lógica de programação em
 
 ### Melhorias Futuras
 
-- [] Refatorar o código utilizando conceitos de JavaScript Orientado a Objetos para uma melhor organização e manutenibilidade.
-- [] Implementar a captura de todas as teclas do teclado numérico para uma experiência de uso mais fluida.
+- [ ] Refatorar o código utilizando conceitos de JavaScript Orientado a Objetos para uma melhor organização e manutenibilidade.
+- [ ] Implementar a captura de todas as teclas do teclado numérico para uma experiência de uso mais fluida.
